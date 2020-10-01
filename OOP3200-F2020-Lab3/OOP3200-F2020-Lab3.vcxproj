@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleInput.cpp" />
+    <ClCompile Include="ExtendedWorkTicket.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleInput.h" />
+    <ClInclude Include="ExtendedWorkTicket.h" />
     <ClInclude Include="MyDate.h" />
     <ClInclude Include="WorkTicket.h" />
   </ItemGroup>
