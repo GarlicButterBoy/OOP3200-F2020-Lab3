@@ -5,12 +5,17 @@
 
 #include "ExtendedWorkTicket.h"
 
-#include <string>
+//#include <string>
 
  /**
   * ExtendedWorkTicket implementation
   */
 
+
+ExtendedWorkTicket::ExtendedWorkTicket() : WorkTicket(), m_isOpen(true)
+{
+
+}
 
   /**
    * @param myTicketNumber
@@ -21,13 +26,13 @@
    * @param myDescription
    * @param isOpen
    */
-ExtendedWorkTicket::ExtendedWorkTicket(int myTicketNumber, std::string myClientId, int day, int month, int year, std::string myDescription, bool m_isOpen)
-	: WorkTicket(myTicketNumber, myClientId, day, month, year, myDescription), m_isOpen(true) {};
+ExtendedWorkTicket::ExtendedWorkTicket(const int myTicketNumber, std::string myClientId, const int day, const int month, const int year, std::string myDescription, const bool is_open)
+	: WorkTicket(myTicketNumber, myClientId, day, month, year, myDescription), m_isOpen(is_open) {};
 
 /**
  * @return bool
  */
-bool ExtendedWorkTicket::GetIsOpen()
+bool ExtendedWorkTicket::GetIsOpen() const
 {
     return m_isOpen;
 }
@@ -35,7 +40,7 @@ bool ExtendedWorkTicket::GetIsOpen()
 /**
  * @param value
  */
-void ExtendedWorkTicket::SetIsOpen(bool value)
+void ExtendedWorkTicket::SetIsOpen(const bool value)
 {
     m_isOpen = value;
 }
@@ -43,7 +48,7 @@ void ExtendedWorkTicket::SetIsOpen(bool value)
 /**
  * @return string
  */
-void ExtendedWorkTicket::ShowWorkTicket()
+void ExtendedWorkTicket::ShowWorkTicket() const
 {
 	//std::string outputString;
 	std::string ticketStatus;
@@ -63,17 +68,19 @@ void ExtendedWorkTicket::ShowWorkTicket()
 }
 
 /**
- * @param isOpen
+ * @param ticketNumber
+ * @param client_id
+ * @param day
+ * @param month
+ * @param year
+ * @param description
+ * @param is_open
  */
-bool ExtendedWorkTicket::SetWorkTicket(int ticketNumber, string clientId, int day, int month, int year, string description, bool isOpen)
+bool ExtendedWorkTicket::SetWorkTicket(const int ticketNumber, const string& client_id, const int day, const int month, const int year, const string& description, bool is_open)
 {
-	bool valid = WorkTicket::SetWorkTicket(ticketNumber, clientId, day, month, year, description);
-	if (valid)
-	{
-		isOpen = true;
-		//valid = true;
-	}
-	return valid;
+	is_open = WorkTicket::SetWorkTicket(ticketNumber, client_id, day, month, year, description);
+
+	return is_open;
 }
 
 /**
@@ -87,12 +94,57 @@ void ExtendedWorkTicket::CloseTicket()
 	}
 }
 
+ExtendedWorkTicket& ExtendedWorkTicket::operator=(const ExtendedWorkTicket& original)
+{
+	SetWorkTicket(original.GetTicketNumber(), original.GetClientId(), original.GetDate().GetDay(),
+		original.GetDate().GetMonth(), original.GetDate().GetYear(), original.GetDescription(), original.GetIsOpen());
+	return *this;
+}
+
+ExtendedWorkTicket::operator string() const
+{
+	stringstream strStream;
+	strStream << "Work Ticket # " << GetTicketNumber()
+		<< " - " << GetClientId()
+		<< " (" << GetDate() << "): "
+		<< GetDescription() << "  "
+		<< GetIsOpen();
+	return strStream.str();
+}
+
+bool ExtendedWorkTicket::operator==(const ExtendedWorkTicket& original) const
+{
+
+
+	return ((GetTicketNumber() == original.GetTicketNumber())) &&
+		((GetClientId() == original.GetClientId())) &&
+		((GetDate() == original.GetDate())) &&
+		(GetDescription() == original.GetDescription()) &&
+		(GetIsOpen() == original.GetIsOpen());
+}
+
+//istream& operator>>(istream& in, ExtendedWorkTicket& ticket)
+//{
+
+//}
+
 ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket)
 {
-	out << ticket.GetTicketNumber() << endl
+	/* Overload the '<<' operator relative to the class to displays all the
+	   object's attributes neatly on the console or to any ostream. This will
+	   duplicate the functionality of the ShowWorkTicket() method however keep
+	   the original method intact for legacy reasons. */
+
+	out << "\nTicket is Open: " << ticket.m_isOpen << endl;
+
+	return out;
+
+
+
+	/*out << ticket.GetTicketNumber() << endl
 		<< ticket.GetClientId() << endl
 		<< ticket.GetDate() << endl
 		<< ticket.GetDescription() << endl
 		<< ticket.m_isOpen;
-	return out;
+	return out;*/
 }
