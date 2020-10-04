@@ -1,4 +1,8 @@
-/** MyDate.h - My Date Class
+/*
+ * MyDate.h
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
  *
  *	The MyDate class stores and manipulates Gregorian dates in a C++ program.
  *  The aim of creating this class is to demonstrate some fundamental and

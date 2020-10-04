@@ -1,3 +1,10 @@
+/*
+ * ConsoleInput.cpp
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
+ */
+
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -23,7 +30,7 @@ double ConsoleInput::ReadDouble(const double MIN, const double MAX)
 	if (cin.fail())            // if user input fails...
 	{
 		cin.clear(); // Reset the fail() state of the cin object.
-		cin.sync();  // clear the buffer 
+		cin.sync();  // clear the buffer
 		// report the problem to the user.
 		cerr << "* Invalid input. Please try again and enter a numeric value.\n";
 		// Try again by calling the function again (recursion)

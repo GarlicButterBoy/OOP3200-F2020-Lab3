@@ -1,5 +1,8 @@
-/**
- * Project Untitled
+/*
+ * ExtendedWorkTicket.cpp
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
  */
 
 

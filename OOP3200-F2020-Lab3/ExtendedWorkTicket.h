@@ -1,5 +1,8 @@
-/**
- * Project Untitled
+/*
+ * ExtendedWorkTicket.h
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
  */
 
 #pragma once
@@ -62,11 +65,11 @@ public:
 
 private:
 
-	
+
 
 	bool m_isOpen;
 
-	
+
 };
 
 #endif //_EXTENDEDWORKTICKET_H

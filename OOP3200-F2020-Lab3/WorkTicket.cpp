@@ -1,3 +1,10 @@
+/*
+ * MyDate.cpp
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
+ */
+
 /***************************************************************************
 *	 LAB C1 Method Definitions
 *	 - Parameterized Constructor
@@ -7,7 +14,7 @@
 *	 - SetDate()
 ***************************************************************************/
 
-// WorkTicket::Parameterized Constructor definition
+//// WorkTicket::Parameterized Constructor definition
 #include <iostream>		// for cin, cout
 #include <stdexcept>	// for invalid_argument
 #include "WorkTicket.h"

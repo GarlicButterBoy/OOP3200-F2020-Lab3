@@ -1,9 +1,15 @@
+/*
+ * ConsoleInput.h
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
+ */
 #pragma once
 
 #ifndef MY_CONSOLE_INPUT_H
 #define MY_CONSOLE_INPUT_H
 
-#include <limits> 
+#include <limits>
 #include <cfloat>  // for limits of a double DBL_MIN and DBL_MAX
 
 class ConsoleInput

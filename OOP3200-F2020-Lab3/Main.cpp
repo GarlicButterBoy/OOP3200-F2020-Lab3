@@ -1,4 +1,9 @@
-
+/*
+ * Main.cpp
+ * Nick Sturch-Flint
+ * October 4, 2020
+ * 100303769
+ */
 
 #include <iostream>
 
