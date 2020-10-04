@@ -28,6 +28,8 @@ public:
 
     bool GetIsOpen() const;
 
+    string GetIsOpenString() const;
+
     /**
      * @param value
      */
@@ -59,7 +61,12 @@ public:
     friend ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket); // Output
 
 private:
-    bool m_isOpen;
+
+	
+
+	bool m_isOpen;
+
+	
 };
 
 #endif //_EXTENDEDWORKTICKET_H

@@ -37,6 +37,11 @@ bool ExtendedWorkTicket::GetIsOpen() const
     return m_isOpen;
 }
 
+string ExtendedWorkTicket::GetIsOpenString() const
+{
+	return (GetIsOpen()) ? "True" : "False";
+}
+
 /**
  * @param value
  */
@@ -63,7 +68,7 @@ void ExtendedWorkTicket::ShowWorkTicket() const
 	}
 
 	WorkTicket::ShowWorkTicket();
-	cout << "\n Ticket is " + ticketStatus;
+	cout << "\nTicket is " + ticketStatus;
 
 }
 
@@ -108,7 +113,7 @@ ExtendedWorkTicket::operator string() const
 		<< " - " << GetClientId()
 		<< " (" << GetDate() << "): "
 		<< GetDescription() << "  "
-		<< GetIsOpen();
+		<< GetIsOpenString();
 	return strStream.str();
 }
 
@@ -135,16 +140,11 @@ ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket)
 	   duplicate the functionality of the ShowWorkTicket() method however keep
 	   the original method intact for legacy reasons. */
 
-	out << "\nTicket is Open: " << ticket.m_isOpen << endl;
-
-	return out;
-
-
-
-	/*out << ticket.GetTicketNumber() << endl
+	out << ticket.GetTicketNumber() << endl
 		<< ticket.GetClientId() << endl
 		<< ticket.GetDate() << endl
-		<< ticket.GetDescription() << endl
-		<< ticket.m_isOpen;
-	return out;*/
+		<< ticket.GetDescription() << endl;
+	out << "\nTicket is Open: " << ticket.GetIsOpenString() << endl;
+
+	return out;
 }
