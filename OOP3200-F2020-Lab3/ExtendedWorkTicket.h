@@ -9,10 +9,8 @@
 #include <string>
 #include "WorkTicket.h"
 
-class ExtendedWorkTicket {
+class ExtendedWorkTicket: public WorkTicket {
 public:
-    void Attribute1;
-
     /**
      * @param myTicketNumber
      * @param myClientId
@@ -22,7 +20,8 @@ public:
      * @param myDescription
      * @param isOpen
      */
-    void ExtendedWorkTicket(int myTicketNumber, std::string myClientId, int day, int month, int year, std::string myDescription, bool isOpen);
+    ExtendedWorkTicket(int myTicketNumber, std::string myClientId, int day, int month, int year, std::string myDescription, bool m_isOpen = true);
+        
 
     bool GetIsOpen();
 
@@ -31,19 +30,23 @@ public:
      */
     void SetIsOpen(bool value);
 
-    std::string ShowWorkTicket();
+    void ShowWorkTicket();
 
     /**
      * @param isOpen
      */
-    void SetWorkTicket(bool isOpen);
+   // virtual bool SetWorkTicket();
+    virtual bool SetWorkTicket(int ticketNumber, string clientId, int day, int month, int year, string description, bool isOpen = true);
 
     /**
      * @param isOpen
      */
-    void CloseTicket(bool isOpen);
+    void CloseTicket();
+
+    friend ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket); // Output
+
 private:
-    bool isOpen;
+    bool m_isOpen;
 };
 
 #endif //_EXTENDEDWORKTICKET_H

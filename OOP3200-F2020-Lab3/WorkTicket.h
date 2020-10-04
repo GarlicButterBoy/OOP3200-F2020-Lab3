@@ -26,6 +26,7 @@ using namespace std;
 class WorkTicket
 {
 public:
+	virtual ~WorkTicket() = default;
 
 	/***************************************************************************
 	*	Default and parameterized constructor(s).
@@ -35,7 +36,7 @@ public:
 	***************************************************************************/
 
 	WorkTicket() : myTicketNumber(0), myClientId(""), myDate(1, 1, 2000), myDescription("") { }
-	WorkTicket(int ticket_number, const string& client_id, int day, int month, int year, const string& description);
+	WorkTicket(int ticket_number, string& client_id, int day, int month, int year, string& description);
 
 	/***************************************************************************
 	*	 Copy constructor
@@ -63,14 +64,14 @@ public:
 	*	the console window.
 	***************************************************************************/
 
-	virtual void ShowWorkTicket() const; // accessor       
+	virtual void ShowWorkTicket() const; // accessor
 
    /***************************************************************************
    *	Attribute Sets/Gets.
    *	Include a set (mutator) and get (accessor) method for each attribute.
    ***************************************************************************/
 
-   // Ticket Number     
+   // Ticket Number
 	void SetTicketNumber(int ticketNumber);
 	int GetTicketNumber() const { return myTicketNumber; }
 
@@ -105,7 +106,7 @@ private:
 
 	int myTicketNumber;	// Work Ticket Number - A whole, positive number.
 	string myClientId;		// Client ID - The alpha-numeric code assigned to the client.
-	MyDate myDate; 		// Work Ticket Date - the date the workticket was created     
+	MyDate myDate; 		// Work Ticket Date - the date the workticket was created
 	string myDescription;  // Issue Description - A description of the issue the client is having.
 };  // end of WorkTicket class
 
@@ -119,7 +120,7 @@ private:
 ***************************************************************************/
 
 // WorkTicket::Parameterized Constructor definition
-WorkTicket::WorkTicket(const int ticket_number, const string& client_id, const int month, const int day, const int year, const string& description)
+WorkTicket::WorkTicket(int ticket_number, string& client_id, int day, int month, int year, string& description)
 {
 	// Set each data member with appropriate validation:
 	SetTicketNumber(ticket_number);
@@ -129,7 +130,7 @@ WorkTicket::WorkTicket(const int ticket_number, const string& client_id, const i
 }
 
 // WorkTicket::SetTicket definition
-bool WorkTicket::SetWorkTicket(const int ticket_number, const string& client_id, int day, int month, int year, const string& description)
+inline bool WorkTicket::SetWorkTicket(int ticket_number, const string& client_id, int day, int month, int year, const string& description)
 {
 	MyDate workingDate;
 	const auto min_year = 2000;
@@ -139,7 +140,7 @@ bool WorkTicket::SetWorkTicket(const int ticket_number, const string& client_id,
 	// check numeric parameters
 	if (ticket_number < 0 || year < min_year || year > max_year)
 		valid = false;
-	// check string parameters     
+	// check string parameters
 	else if (client_id.length() < 1 || description.length() < 1)
 		valid = false;
 	else
@@ -157,7 +158,7 @@ bool WorkTicket::SetWorkTicket(const int ticket_number, const string& client_id,
 
 	if (valid) // all parameters are valid
 	{
-		// set the workticket date         
+		// set the workticket date
 		myDate = workingDate;
 
 		// set atributes to parameter values
@@ -170,20 +171,21 @@ bool WorkTicket::SetWorkTicket(const int ticket_number, const string& client_id,
 }
 
 // WorkTicket::ShowTicket definition
-void WorkTicket::ShowWorkTicket() const
+inline void WorkTicket::ShowWorkTicket() const
 {
 	// display the attributes of the object neatly to the console
 	cout << "\nWork Ticket #: " << myTicketNumber
 		<< "\nClient ID:     " << myClientId
 		<< "\nDate:          " << myDate
 		<< "\nIssue:         " << myDescription << endl;
+
 }
 
 // WorkTicket::SetTicketNumber definition
 void WorkTicket::SetTicketNumber(const int ticketNumber)
 {
-	// If a work ticket number is set to a zero or a negative number, 
-	// an invalid_argument exception should be thrown, with an 
+	// If a work ticket number is set to a zero or a negative number,
+	// an invalid_argument exception should be thrown, with an
 	// appropriate message.
 	if (ticketNumber > 0)
 	{
@@ -198,12 +200,12 @@ void WorkTicket::SetTicketNumber(const int ticketNumber)
 // WorkTicket::ShowTicket definition
 void WorkTicket::SetDate(const int day, const int month, const int year)
 {
-	//  An invalid_argument exception should be thrown, with an 
+	//  An invalid_argument exception should be thrown, with an
 	//  appropriate message if the day, month, or year is set out of range.
 
 	const int MIN_YEAR = 2000;
 	const int MAX_YEAR = 2099;
-	if (year >= MIN_YEAR && year <= MAX_YEAR) // unique year requirements 
+	if (year >= MIN_YEAR && year <= MAX_YEAR) // unique year requirements
 	{
 		myDate.SetDate(day, month, year); // day and month validated in the method
 	}
@@ -321,7 +323,7 @@ istream& operator>>(istream& in, WorkTicket& ticket)
 
 	try
 	{
-		// prompt for user input for each attribute and store in the 
+		// prompt for user input for each attribute and store in the
 		// corresponding temp variable
 		cout << "\nWorkTicket #: ";
 		in >> ticket_number;
@@ -330,7 +332,7 @@ istream& operator>>(istream& in, WorkTicket& ticket)
 		cout << "Client ID: ";
 		in >> client_id;
 		fflush(stdin);
-		
+
 		//getline(in, client_id);
 
 		cout << "Date (dd/mm/yyyy): ";
@@ -354,6 +356,6 @@ istream& operator>>(istream& in, WorkTicket& ticket)
 	}
 
 	return in;
-} // end of overloaded output operator 
+} // end of overloaded output operator
 #endif
 
